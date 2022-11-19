@@ -1,0 +1,17 @@
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui">
+	<ribbon>
+		<tabs>
+			<tab id="JimsVBATools" label="JimsVBATools">
+			    <group id="grpApps" label="Applications">
+			        <button id="btnOpenDAXStudio" label="DAX Studio" image="daxstudio" onAction="CmdOpenDAXStudio_Callback" size="normal"/>
+			        <button id="btnOpenRibbonXEditor" label="Office RibbonX Editor" image="officeribbonxeditor" onAction="CmdOpenRibbonXEditor_Callback" size="normal"/>
+			        <button id="btnOpenFileExplorer" label="File Explorer" image="explorer" onAction="CmdOpenExplorer_Callback" size="normal"/>
+			        <button id="btnOpenTerminal" label="Windows Terminal" image="terminal" onAction="CmdOpenTerminal_Callback" size="normal"/>
+			        <button id="btnOpenVSCode" label="Visual Studio Code" image="vscode" onAction="CmdOpenVSCode_Callback" size="normal"/>
+			        <button id="btnOpenWord" label="Microsoft Word" image="word" onAction="CmdOpenWord_Callback" size="normal"/>
+			        <button id="btnOpenOutlook" label="Microsoft Outlook" image="outlook" onAction="CmdOpenOutlook_Callback" size="normal"/>
+			    </group>				
+			</tab>
+		</tabs>
+	</ribbon>
+</customUI>

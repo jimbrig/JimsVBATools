@@ -1,0 +1,27 @@
+'Callback for btnOpenDAXStudio onAction
+Sub CmdOpenDAXStudio_Callback(control As IRibbonControl)
+End Sub
+
+'Callback for btnOpenRibbonXEditor onAction
+Sub CmdOpenRibbonXEditor_Callback(control As IRibbonControl)
+End Sub
+
+'Callback for btnOpenFileExplorer onAction
+Sub CmdOpenExplorer_Callback(control As IRibbonControl)
+End Sub
+
+'Callback for btnOpenTerminal onAction
+Sub CmdOpenTerminal_Callback(control As IRibbonControl)
+End Sub
+
+'Callback for btnOpenVSCode onAction
+Sub CmdOpenVSCode_Callback(control As IRibbonControl)
+End Sub
+
+'Callback for btnOpenWord onAction
+Sub CmdOpenWord_Callback(control As IRibbonControl)
+End Sub
+
+'Callback for btnOpenOutlook onAction
+Sub CmdOpenOutlook_Callback(control As IRibbonControl)
+End Sub
