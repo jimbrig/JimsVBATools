@@ -11,11 +11,19 @@ Option Explicit
 ' Section: Declarations
 '-------------------------------------------------------
 
-' Set Previous State Dims
-Dim prevCalc As XlCalculation ' Application.Calculation
-Dim prevEvents As Boolean     ' Application.EnableEvents
-Dim prevScreen As Boolean     ' Application.ScreenUpdating
-Dim prevPageBreaks As Boolean ' ActiveSheet.DisplayPageBreaks
+' Settings - Logging
+' Public EnableLogging As Boolean
+' Public Logger As cldLogger
+
+' Set Previous State Public Dims
+Dim prevCalc As XlCalculation       ' Application.Calculation
+Dim prevEvents As Boolean           ' Application.EnableEvents
+Dim prevScreen As Boolean           ' Application.ScreenUpdating
+Dim prevAlerts As Boolean          ' Application.DisplayAlerts
+Dim prevStatusBar As Boolean        ' Application.StatusBar
+Dim prevDisplayStatusBar As Boolean ' Application.DisplayStatusBar
+Dim prevAnimations As Boolean       ' Application.EnableAnimations
+Dim prevPageBreaks As Boolean       ' ActiveSheet.DisplayPageBreaks
 
 ' ----------------------------------------------------------------
 ' Procedure Name: OptimizeVBA
@@ -26,11 +34,27 @@ Dim prevPageBreaks As Boolean ' ActiveSheet.DisplayPageBreaks
 ' Author: Jimmy Briggs
 ' Date: 2022-06-02
 ' ----------------------------------------------------------------
-Sub OptimizeVBA(isOn As Boolean)
-    Application.Calculation = IIf(isOn, xlCalculationManual, xlCalculationAutomatic)
-    Application.EnableEvents = Not (isOn)
-    Application.ScreenUpdating = Not (isOn)
-    ActiveSheet.DisplayPageBreaks = Not (isOn)
+Public Sub OptimizeVBA(ByVal Toggle As Boolean)
+    
+    ' EnableLogging = GetSetting("EableLogging")
+    
+    With Application
+        .ScreenUpdating = Not Toggle
+        .EnableEvents = Not Toggle
+        .DisplayAlerts = Not Toggle
+        .StatusBar = Not Toggle
+        .EnableAnimations = Not Toggle
+        .DisplayStatusBar = Not Toggle
+        .Calculation = IIf(Toggle, xlCalculationManual, xlCalculationAutomatic)
+    End With
+    
+    ActiveSheet.DisplayPageBreaks = Not Toggle
+
+    ' If Toggle And EnableLogging Then
+    '   Set Logger = New clsLogger
+    '   LogDebug "Start Logging..."
+    ' End If
+    
 End Sub
 
 ' ----------------------------------------------------------------
@@ -46,6 +70,10 @@ Sub OptimizeOn()
     prevEvents = Application.EnableEvents: Application.EnableEvents = False
     prevScreen = Application.ScreenUpdating: Application.ScreenUpdating = False
     prevPageBreaks = ActiveSheet.DisplayPageBreaks: ActiveSheet.DisplayPageBreaks = False
+    prevStatusBar = Application.StatusBar: Application.StatusBar = False
+    prevDisplayStatusBar = Application.DisplayStatusBar: Application.DisplayStatusBar = False
+    prevAlerts = Application.DisplayAlerts: Application.DisplayAlerts = False
+    prevAnimations = Application.EnableAnimations: Application.EnableAnimations = False
 End Sub
 
 ' ----------------------------------------------------------------
@@ -57,8 +85,13 @@ End Sub
 ' Date: 2022-06-02
 ' ----------------------------------------------------------------
 Sub OptimizeOff()
-    Application.Calculation = prevCalc
-    Application.EnableEvents = prevEvents
-    Application.ScreenUpdating = prevScreen
+    With Application
+        .Calculation = prevCalc
+        .EnableEvents = prevEvents
+        .ScreenUpdating = prevScreen
+        .DisplayStatusBar = prevDisplayStatusBar
+        .StatusBar = prevStatusBar
+        .DisplayAlerts = prevAlerts
+    End With
     ActiveSheet.DisplayPageBreaks = prevPageBreaks
 End Sub
